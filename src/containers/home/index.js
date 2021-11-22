@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, Image, ScrollView, Dimensions, Touchable, ListViewBase } from 'react-native';
-// import { INPUT_STYLE, CONTAINER, BUTTON_STYLE_LOGIN } from '../../assets/styles';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView, Image, ScrollView, Dimensions, Touchable, ListViewBase, TextInput } from 'react-native';
+
+import { fetchMovie } from '../../actions';
 
 const DATA = ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10"];
 
@@ -11,6 +12,12 @@ const images = {
 }
 
 function Home(props) {
+    const [state, setState] = useState({
+        s: 'Enter a movie ...',
+        results: [],
+        selected: {}
+    });
+
     function _renderListView(data) {
         return (
             <View style={styles.cardStyle}>
@@ -33,15 +40,30 @@ function Home(props) {
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ 
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Text style={{ fontSize: 36 }}>InvokeMDB List</Text>
+                <TextInput 
+                    style={styles.searchBox}
+                    onChangeText={text => setState(prevState => {
+                        return {...prevState, s: text}
+                    })}
+                    onSubmitEditing={search}
+                    value={state.s}
+                />
+            </View>
             <ScrollView
                 // horizontal = {true}
                 showsVerticalScrollIndicator = {false}
                 // showsHorizontalScrollIndicator = {false}
                 contentContainerStyle = {{
                     paddingHorizontal: 20,
-                    flexWrap: 'wrap',
-                    flexDirection: "row",
-                    justifyContent: 'space-around'
+                    // flexWrap: 'wrap',
+                    flexDirection: "column",
+                    justifyContent: 'space-around',
+                    alignItems: 'center'
                 }}
             >
                 {/* <Text>This is Home page</Text> */}
@@ -53,9 +75,9 @@ function Home(props) {
 
 const styles = {
     cardStyle: {
-        width: 165,
-        // width: Dimensions.get('window').width - 50,
-        height: 250,
+        // width: 165,
+        width: Dimensions.get('window').width - 50,
+        height: 600,
         padding: 10,
         backgroundColor: 'white',
         borderRadius: 10,
@@ -73,6 +95,16 @@ const styles = {
         padding: 10,
         backgroundColor: "lightgrey",
         borderRadius: 6
+    },
+
+    searchBox: {
+        fontSize: 20,
+        fontWeight: '300',
+        padding: 20,
+        width: Dimensions.get('window').width - 50,
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        marginBottom: 40
     }
 }
 

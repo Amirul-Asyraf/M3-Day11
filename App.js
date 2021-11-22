@@ -13,6 +13,7 @@ import Home from './src/containers/home';
 import Details from './src/containers/details';
 import About from './src/containers/about';
 import Contact from './src/containers/contact';
+import MovieList from './src/containers/movieList';
 
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/store/configureStore'
@@ -43,7 +44,7 @@ function TabNav () {
     })}>
       <Tab.Screen 
         name="Home" 
-        component={Home}
+        component={MovieList}
         options={{
           headerTitle: "My Town",
           // tabBarIcon: () => (

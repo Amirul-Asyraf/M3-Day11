@@ -11,11 +11,6 @@ function Contact() {
     console.log(count);
     const dispatch = useDispatch(); //mapDispatchToProps
 
-    function add(){
-        dispatch(increment());
-        // console.log(count)
-    }
-
     return(
         <View style={CONTAINER}>
             <Text style={{ fontSize: 16, marginVertical: 20 }}>This is Contact</Text>
@@ -23,8 +18,7 @@ function Contact() {
             <Text style={{ fontSize: 36, marginVertical: 20 }}>Count: {count.count}</Text>
 
             {/* <Button title="Increment" onPress={() => dispatch(increment())} /> */}
-            <Button title="Increment" onPress={() => add()} />
-
+            <Button title="Increment" onPress={() => dispatch(increment())} />
 
             <Button title="Decrement" onPress={() => dispatch(decrement())}/>
 
