@@ -5,6 +5,7 @@ export const CONTAINER = {
     flex: 1,
     backgroundColor: 'lightblue',
     alignItems: 'center',
+    justifyContent: 'center'
 }
 
 export const INPUT_STYLE = {

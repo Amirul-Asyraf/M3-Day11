@@ -26,7 +26,7 @@ function Login(props) {
                 <Text>Go to Register Screen</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={BUTTON_STYLE_LOGIN} onPress={() => props.navigation.navigate("Home")}>
+            <TouchableOpacity style={BUTTON_STYLE_LOGIN} onPress={() => props.navigation.navigate("TabNav")}>
                 <Text>Go to Home Screen</Text>
             </TouchableOpacity>
         </SafeAreaView>

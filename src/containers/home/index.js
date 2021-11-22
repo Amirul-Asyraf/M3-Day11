@@ -11,14 +11,6 @@ const images = {
 }
 
 function Home(props) {
-    // const _renderList = () => {
-    //     return (
-    //         <View>
-    //             <Text></Text>
-    //         </View>
-    //     );
-    // };
-
     function _renderListView(data) {
         return (
             <View style={styles.cardStyle}>
@@ -32,7 +24,7 @@ function Home(props) {
                     <Text>Genre: {images.genre}</Text>
                 </View>
 
-                <TouchableOpacity onPress = {() => props.navigation.navigate("Details")} style={styles.detailsButton}>
+                <TouchableOpacity onPress = {() => props.navigation.navigate("Details", { title: data, rating: images.rating, genre: images.genre })} style={styles.detailsButton}>
                     <Text>More Details</Text>
                 </TouchableOpacity>
             </View>
