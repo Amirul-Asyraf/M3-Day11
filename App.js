@@ -14,6 +14,7 @@ import Details from './src/containers/details';
 import About from './src/containers/about';
 import Contact from './src/containers/contact';
 import MovieList from './src/containers/movieList';
+import Bag from './src/containers/bag';
 
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/store/configureStore'
@@ -85,6 +86,7 @@ export default function App() {
               }}  
             />
             <Stack.Screen name="Details" component={Details}/>
+            <Stack.Screen name="Bag" component={Bag}/>
 
           </Stack.Navigator>
         </NavigationContainer>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableHighlight, Modal } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableHighlight, Modal, FlatList } from 'react-native';
 
 function MovieList() {
   const apiurl = "http://www.omdbapi.com/?apikey=5f8972e6"
@@ -30,6 +30,43 @@ function MovieList() {
     })
   }
 
+  function _renderListView(result) {
+    return (
+      <TouchableHighlight 
+        key={result.imdbID} 
+        onPress={() => openPopup(result.imdbID)}
+      >
+        <View  style={styles.result}>
+          <Image 
+            source={{ uri: result.Poster}}
+            style={{
+              width: '100%',
+              height: 300,
+            }}
+            resizeMode="cover"
+          />
+          <Text style={styles.heading}>{result.Title}</Text>
+        </View> 
+      </TouchableHighlight>
+    )
+  }
+
+  function _renderEmptyView() {
+    return (
+      <View
+          style={{
+              backgroundColor: 'salmon',
+              color: 'white',
+              justifyContent: 'center',
+              alignItems: 'center'
+          }}
+      >
+          <Text>Sorry come back later.</Text>
+          <Text>No data now.</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Invoke DB</Text>
@@ -42,24 +79,15 @@ function MovieList() {
         value={state.s}
       />
       <ScrollView style={styles.results}>
-        {state.results.map(result => (
-          <TouchableHighlight 
-            key={result.imdbID} 
-            onPress={() => openPopup(result.imdbID)}
-          >
-            <View  style={styles.result}>
-              <Image 
-                source={{ uri: result.Poster}}
-                style={{
-                  width: '100%',
-                  height: 300,
-                }}
-                resizeMode="cover"
-              />
-              <Text style={styles.heading}>{result.Title}</Text>
-            </View> 
-          </TouchableHighlight>
-        ))}
+        {/* {state.results.map(result => (
+          
+        ))} */}
+        <FlatList 
+          data = {state.results}
+          renderItem = {( {item} ) => _renderListView(item)}
+          keyExtractor = {(item) => item.id}
+          ListEmptyComponent = {() => _renderEmptyView()}
+        />
       </ScrollView>
 
       <Modal 
